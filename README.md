@@ -1,1 +1,1 @@
-fucku
+SyntaxError: errorsawww invalid syntax
