@@ -1,0 +1,1 @@
+SyntaxError: errorsawww invalid syntax
