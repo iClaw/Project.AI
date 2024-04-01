@@ -1,1 +1,2 @@
-SyntaxError: errorsawww invalid syntax
+# vk-gpt
+ vk-gpt от Георгия Савостьянова, Ильи Тимакова,Артёма Коваленко и Георгия  Балкина

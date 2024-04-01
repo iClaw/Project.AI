@@ -1,4 +1,9 @@
-import openai
+from transformers import pipeline
+import requests
+requests.packages.urllib3.util.timeout = 1200  # Увеличить таймаут до 5 минут
+
+# Загрузить модель ruGPT-3.5 13B из Hugging Face
+model = pipeline("text-generation", model="ai-forever/ruGPT-3.5-13B")
 
 # Загрузить входные данные из файла
 with open("input.txt", "r") as f:
@@ -17,20 +22,13 @@ for line in lines:
 # Сортировать сообщения по времени отправки
 messages.sort(key=lambda x: x["timestamp"])
 
-# Создать приглашение для модели ruGPT-3.5
+# Создать приглашение для модели ruGPT-3.5 13B
 prompt = "Суммируйте следующий диалог: \n\n"
 for message in messages:
     prompt += f"{message['sender']}: {message['text']}\n"
 
-# Вызвать API ruGPT-3.5 для генерации сводки
-response = openai.Completion.create(
-    model="text-bison-001",
-    prompt=prompt,
-    temperature=0.7,
-)
-
-# Извлечь сгенерированную сводку
-summary = response["choices"][0]["text"]
+# Сгенерировать сводку диалога
+summary = model(prompt, max_length=128)[0]["generated_text"]
 
 # Вывести сводку
 print(summary)
